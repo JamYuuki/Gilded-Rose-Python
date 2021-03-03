@@ -1,3 +1,7 @@
+def change_quality(item):
+    if item.quality < 50:
+        item.quality += 1
+
 class GildedRose(object):
 
     def __init__(self, items):
@@ -10,15 +14,12 @@ class GildedRose(object):
                     if item.name != "Sulfuras, Hand of Ragnaros":
                         item.quality = item.quality - 1
             else:
-                if item.quality < 50:
-                    item.quality = item.quality + 1
-                    if item.name == "Backstage passes to a TAFKAL80ETC concert":
-                        if item.sell_in < 11:
-                            if item.quality < 50:
-                                item.quality = item.quality + 1
-                        if item.sell_in < 6:
-                            if item.quality < 50:
-                                item.quality = item.quality + 1
+                change_quality(item)
+                if item.name == "Backstage passes to a TAFKAL80ETC concert":
+                    if item.sell_in < 11:
+                        change_quality(item)
+                    if item.sell_in < 6:
+                        change_quality(item)
             if item.name != "Sulfuras, Hand of Ragnaros":
                 item.sell_in = item.sell_in - 1
             if item.sell_in < 0:
@@ -30,5 +31,4 @@ class GildedRose(object):
                     else:
                         item.quality = item.quality - item.quality
                 else:
-                    if item.quality < 50:
-                        item.quality = item.quality + 1
+                    change_quality(item)
